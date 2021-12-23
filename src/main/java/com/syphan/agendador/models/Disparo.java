@@ -3,6 +3,7 @@ package com.syphan.agendador.models;
 import javax.persistence.Entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.vertx.core.json.JsonObject;
 
 @Entity
 public class Disparo extends PanacheEntity {
@@ -14,12 +15,18 @@ public class Disparo extends PanacheEntity {
     private String status;
 
     public Disparo() {
+        super();
     }
 
     public Disparo(Long id_agendamento, String retorno, String status) {
+        super();
         this.id_agendamento = id_agendamento;
         this.retorno = retorno;
         this.status = status;
+    }
+
+    public Long getId() {
+        return this.id;
     }
 
     public Long getId_agendamento() {
@@ -46,4 +53,8 @@ public class Disparo extends PanacheEntity {
         this.status = status;
     }
     
+    @Override
+    public String toString() {
+        return JsonObject.mapFrom(this).encodePrettily();
+    }
 }
